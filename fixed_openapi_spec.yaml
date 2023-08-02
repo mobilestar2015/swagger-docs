@@ -1,0 +1,105 @@
+info:
+  title: Health Wallet & Digital Wallet API
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /apis/admin/employee/{memberID}:
+    get:
+      description: This endpoint provides text data about the member, including the
+        list of features they have enabled, names of SBCs, SPDs, SOBs, and other info.
+      parameters:
+      - description: Member ID to fetch SBC files list for
+        example: -LjsHRWDtiRsUjW3FliM
+        in: path
+        name: memberID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get Employee SBC Files List
+  /data/empire/{empireID}:
+    get:
+      description: Empires are groups of people given specific features, permissions,
+        settings, apps, etc. This endpoint provides PDFs and files about a company
+        for extraction and addition to an index vector database for conversational
+        AI, where HW admins know about our clients.
+      parameters:
+      - description: Empire ID to fetch data for
+        example: IGD2rzcmR93yv1yvtFIG
+        in: path
+        name: empireID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  clientDescription:
+                    type: string
+                  file:
+                    format: uri
+                    type: string
+                  internalDescription:
+                    type: string
+                type: object
+          description: Successful response
+      summary: Fetch Empire Data
+  /data/feature/{memberID}:
+    get:
+      description: This endpoint provides the features a specific member has, such
+        as telehealth, digital ID cards, etc. Used in conversational AI when the member
+        talks to the bot and wants to know more about the features enabled on their
+        account.
+      parameters:
+      - description: Member ID to fetch feature data for
+        example: RV7nqKH55ksoXl5KjuR2
+        in: path
+        name: memberID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  file:
+                    format: uri
+                    type: string
+                  internalDescription:
+                    type: string
+                  memberDescription:
+                    type: string
+                type: object
+          description: Successful response
+      summary: Fetch Feature Data
+  /data/hra/{memberID}:
+    get:
+      description: This endpoint provides HRA data about the member from their previous
+        HRA test.
+      parameters:
+      - description: Member ID to fetch HRA data for
+        example: 7WKjMPay9sknoYzsMFqW
+        in: path
+        name: memberID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get HRA Data
